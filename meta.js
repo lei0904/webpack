@@ -133,6 +133,10 @@ module.exports = {
       type: 'confirm',
       message: 'Setup e2e tests with Nightwatch?',
     },
+    vuex:{
+        "type": "confirm",
+        "message": "Install vuex?"
+    },
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
