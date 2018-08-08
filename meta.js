@@ -72,12 +72,12 @@ module.exports = {
     router: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Install vue-router?',
+      message: '安装 vue-router?',
     },
     lint: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Use ESLint to lint your code?',
+      message: '使用 ESLint to lint your code?',
     },
     lintConfig: {
       when: 'isNotTest && lint',
@@ -104,7 +104,7 @@ module.exports = {
     unit: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Set up unit tests',
+      message: '是否设置单元测试',
     },
     runner: {
       when: 'isNotTest && unit',
@@ -132,10 +132,6 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Setup e2e tests with Nightwatch?',
-    },
-    vuex:{
-        "type": "confirm",
-        "message": "Install vuex?"
     },
     autoInstall: {
       when: 'isNotTest',
@@ -173,8 +169,7 @@ module.exports = {
     'test/unit/specs/index.js': "unit && runner === 'karma'",
     'test/unit/setup.js': "unit && runner === 'jest'",
     'test/e2e/**/*': 'e2e',
-    'src/router/**/*': 'router',
-     'src/store/**/*': 'vuex',
+    'src/router/**/*': 'router'
   },
   complete: function(data, { chalk }) {
     const green = chalk.green

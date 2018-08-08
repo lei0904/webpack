@@ -153,10 +153,10 @@ import Plugins from './plugins/ces.plugins.js'
 Ces.Plugins = Plugins;
 
 /* ----------- utils ----------- */
-import DateTime from './utils/ces.datetime.js';
+//import DateTime from './utils/ces.datetime.js';
 import Utils from './utils/ces.utils.js';
 
-Ces.DateTime = DateTime;
+//Ces.DateTime = DateTime;
 Ces.Utils = Utils;
 
 export default Ces;
