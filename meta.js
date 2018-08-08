@@ -69,65 +69,6 @@ module.exports = {
         },
       ],
     },
-    lint: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: '使用 ESLint to lint your code?',
-    },
-    lintConfig: {
-      when: 'isNotTest && lint',
-      type: 'list',
-      message: 'Pick an ESLint preset',
-      choices: [
-        {
-          name: 'Standard (https://github.com/standard/standard)',
-          value: 'standard',
-          short: 'Standard',
-        },
-        {
-          name: 'Airbnb (https://github.com/airbnb/javascript)',
-          value: 'airbnb',
-          short: 'Airbnb',
-        },
-        {
-          name: 'none (configure it yourself)',
-          value: 'none',
-          short: 'none',
-        },
-      ],
-    },
-    unit: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: '是否设置单元测试',
-    },
-    runner: {
-      when: 'isNotTest && unit',
-      type: 'list',
-      message: 'Pick a test runner',
-      choices: [
-        {
-          name: 'Jest',
-          value: 'jest',
-          short: 'jest',
-        },
-        {
-          name: 'Karma and Mocha',
-          value: 'karma',
-          short: 'karma',
-        },
-        {
-          name: 'none (configure it yourself)',
-          value: 'noTest',
-          short: 'noTest',
-        },
-      ],
-    },
-    e2e: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: 'Setup e2e tests with Nightwatch?',
-    },
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
@@ -153,17 +94,8 @@ module.exports = {
     },
   },
   filters: {
-    '.eslintrc.js': 'lint',
-    '.eslintignore': 'lint',
     'config/test.env.js': 'unit || e2e',
-    'build/webpack.test.conf.js': "unit && runner === 'karma'",
-    'test/unit/**/*': 'unit',
-    'test/unit/index.js': "unit && runner === 'karma'",
-    'test/unit/jest.conf.js': "unit && runner === 'jest'",
-    'test/unit/karma.conf.js': "unit && runner === 'karma'",
-    'test/unit/specs/index.js': "unit && runner === 'karma'",
-    'test/unit/setup.js': "unit && runner === 'jest'",
-    'test/e2e/**/*': 'e2e'
+    'build/webpack.test.conf.js': "unit && runner === 'karma'"
   },
   complete: function(data, { chalk }) {
     const green = chalk.green
