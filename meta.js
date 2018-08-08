@@ -69,11 +69,6 @@ module.exports = {
         },
       ],
     },
-    router: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: '安装 vue-router?',
-    },
     lint: {
       when: 'isNotTest',
       type: 'confirm',
