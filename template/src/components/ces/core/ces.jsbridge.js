@@ -1,20 +1,3 @@
-/**
- * JSBridge 操作组件
- * @type {{registerHandler, send, callHandler}}
- *
- * callback函数返回参数约定
- *
- * {
- *  status: '1', //1 -- 成功, 0 -- 失败
- *  message: '提示信息'
- *  data: {
- *      o1:{}
- *      o2:
- *  }
- *
- * }
- *
- */
 
 let JSBridge = function () {
 
