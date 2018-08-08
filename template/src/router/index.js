@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Index from '@/views/Index.vue'
 
 
-var routes = [
+let routes = [
     {
         path: '/',
         name: 'Index',
