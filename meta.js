@@ -29,7 +29,7 @@ module.exports = {
     },
     template_version() {
       return templateVersion
-    },
+    }
   },
   
   prompts: {
@@ -90,8 +90,8 @@ module.exports = {
           value: false,
           short: 'no',
         },
-      ],
-    },
+      ]
+    }
   },
   filters: {
     'config/test.env.js': 'unit || e2e',
@@ -118,5 +118,5 @@ module.exports = {
     } else {
       printMessage(data, chalk)
     }
-  },
+  }
 }
