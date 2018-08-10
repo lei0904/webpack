@@ -67,7 +67,7 @@ module.exports = {
           value: 'runtime',
           short: 'runtime',
         }
-      ],
+      ]
     },
     autoInstall: {
       when: 'isNotTest',
