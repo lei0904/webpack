@@ -23,15 +23,6 @@ Vue.prototype.$ces = Ces;
 
 Vue.config.productionTip = false;
 
-//引用mintui
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
-Vue.use(MintUI);
-
-
-//自定义组件注册
-import AddressChild from './components/AddressPicker/address-child.vue'
-Vue.component('cui-address-child', AddressChild);
 
 Ces.ready(function () {
   new Vue({
