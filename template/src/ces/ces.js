@@ -5,30 +5,6 @@ let Ces = {
   email: 'oyp@cesgroup.com.cn'
 };
 
-/**
- * {
- *      name: 'CesCachePlugin'
- *      options: [
- *          {
- *              method: 'save'
- *              data: function() {} || {},
- *              callback: function(rets) {}
- *          },
- *          {
- *              method: 'get'
- *              data: function() {} || {},
- *              callback: function(rets) {}
- *          }
- *      ]
- *      ||
- *      {
- *              method: 'get'
- *              data: function() {} || {},
- *              callback: function(rets) {}
- *          }
- * }
- * @param plugin
- */
 Ces.register = function (plugin) {
   let defaultCallback = function (rets) {
     console.log(rets)
@@ -78,9 +54,6 @@ Ces.ready = function (callback) {
     window.onload = function () {
       Ces.Page.init(callback);
     };
-    /*document.addEventListener("DOMContentLoaded", function () {
-        callback && callback();
-    }, false);*/
   } else {
     if (Ces.__bridge__) {
       callback();
@@ -96,7 +69,7 @@ Ces.ready = function (callback) {
   }
 };
 
-if (!Object.assign) {
+/*if (!Object.assign) {
   // 定义assign方法
   Object.defineProperty(Object, 'assign', {
     enumerable: false,
@@ -133,7 +106,7 @@ if (!Object.assign) {
       return to;
     }
   });
-}
+}*/
 
 
 /* ----------- core ----------- */
@@ -153,10 +126,10 @@ import Plugins from './plugins/ces.plugins.js'
 Ces.Plugins = Plugins;
 
 /* ----------- utils ----------- */
-//import DateTime from './utils/ces.datetime.js';
+import DateTime from './utils/ces.datetime.js';
 import Utils from './utils/ces.utils.js';
 
-//Ces.DateTime = DateTime;
+Ces.DateTime = DateTime;
 Ces.Utils = Utils;
 
 export default Ces;

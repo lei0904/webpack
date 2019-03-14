@@ -1,19 +1,29 @@
 
 <template>
-  <div ref="popup">
+  <div ref="popup"
+       v-show="visibleFlag">
     <div class="mask" @click="_hideLinkage"></div>
     <div class="clearfix linkAddress" >
- <!--     <span class="cui-address-picker-action cui-address-picker-cancel" @click="close">{{ cancelText }}</span>
-      <span class="cui-address-picker-action cui-address-picker-confirm" @click="confirm">{{ confirmText }}</span>
--->
-      <div class="province pickerWrapper">
-        <mt-picker :slots="provinces" @change="onProvinceChange" value-key="name"></mt-picker>
+      <div class="toolbar">
+        <span class="cui-attr-picker-action cui-attr-picker-cancel"
+                   @click.stop="close">{{ cancelText }}</span>
+        <span class="cui-attr-picker-action cui-attr-picker-confirm"
+              @click.stop="confirm">{{ confirmText }}</span>
       </div>
-      <div class="city pickerWrapper">
-        <mt-picker :slots="citys" @change="onCityChange" value-key="name"></mt-picker>
+      <div class="province pickerWrapper" >
+        <mt-picker :slots="provinces"
+                   value-key="name"
+                   @change="onProvinceChange"></mt-picker>
       </div>
-      <div class="area pickerWrapper">
-        <mt-picker :slots="areas" @change="onAreaChange" value-key="name"></mt-picker>
+      <div class="city pickerWrapper" >
+        <mt-picker :slots="citys"
+                   value-key="name"
+                   @change="onCityChange"></mt-picker>
+      </div>
+      <div class="area pickerWrapper" >
+        <mt-picker :slots="areas"
+                   value-key="name"
+                   @change="onAreaChange"></mt-picker>
       </div>
    </div>
   </div>
@@ -21,40 +31,29 @@
 
 <script>
   import {CITY_DATA} from './cityData'  //引入cityData数据
+
   export default {
+    name: 'address-child',
     computed: {
       result() {
-    /*    let area = '';
-        if(this.area.name && this.area.name !== "市辖区"){
-          area = this.area.name;
-        }else if(this.city.name){
-          area = this.city.name;
-        }else{
-          area =this.province.name;
-        }
-        return {
-          //name:this.province.name+this.city.name+this.area.name,
-          name:area,
-          code:this.province.code+','+this.city.code+','+this.area.code
-        }*/
-    let province={},city={},area={};
-    if(this.province){
-      province =this.province;
-    }
-    if(this.city){
-      city = this.city;
-    }
-    if(this.area){
-      area = this.area
-    }
-    return {
-      province:province,
-      city:city,
-      area:area
-    }
+          let province={},city={},area={};
+          if(this.province){
+            province =this.province;
+          }
+          if(this.city){
+            city = this.city;
+          }
+          if(this.area){
+            area = this.area
+          }
+          return {
+            province:province,
+            city:city,
+            area:area
+          }
       }
     },
-  /*  props: {
+    props: {
       cancelText: {
         type: String,
         default: '取消'
@@ -62,22 +61,28 @@
       confirmText: {
         type: String,
         default: '确定'
+      },
+      cover:{
+        type:Object,
+        default:{}
       }
-    },*/
-    name: 'address-child',
+    },
     data() {
       return {
+        visibleFlag: false,
+        attr:"",
+        attrCode:"",
         province:{
-          name:'北京市',
-          code:'110000'
+          name:'上海市',
+          code:'310000'
         },
         city:{
           name:'市辖区',
-          code:'110100'
+          code:'310100'
         },
         area:{
-          name:'东城区',
-          code:'110101'
+          name:'黄浦区',
+          code:'310101'
         },
         flag:0, //最开始省市区那三个picker会初始化调用change事件，但是此时没有省市区数据，因此会报错，
                 //所以以这个标识符来控制当时第一次初始化时调用change事件时直接return
@@ -97,7 +102,7 @@
         citys: [
           {
             flex: 1,
-            values: this._getCity('北京市'),
+            values: this._getCity('上海市'),
             className: 'slot1',
             textAlign: 'center'
           },
@@ -110,7 +115,7 @@
         areas: [
           {
             flex: 1,
-            values: this._getArea('北京市','市辖区'),
+            values: this._getArea('上海市','市辖区'),
             className: 'slot1',
             textAlign: 'center'
           }
@@ -119,6 +124,10 @@
       };
     },
     methods:{
+      onAttrChange: function (picker, value) {
+        this.attr = value[0].name;
+        this.attrCode = value[0].code;
+      },
       _hideLinkage(){
         this.$emit('getLinkAddress',this.result); //触发父组件的getLinkage事件接收结果数据
       },
@@ -127,7 +136,8 @@
           return
         }
         let provinceIndex=picker.getSlotValue(0)
-        this.province=provinceIndex
+        this.province=provinceIndex;
+        console.log('provinceIndex.name--->',provinceIndex.name)
 
           let city=this._getCity(provinceIndex.name)
 
@@ -155,6 +165,7 @@
         let cityIndex=picker.getSlotValue(0)
         this.city=cityIndex
         let provinceIndex=this.province;
+        console.log('onCityChange picker---->',picker)
         if(cityIndex){
           let area=this._getArea(provinceIndex.name,cityIndex.name);
           this.areas[0].values=area
@@ -171,13 +182,22 @@
       },
       //得到省份数据
       _getProvince(){
-        let province=[]
+        let province=[];
+        let ths = this;
         CITY_DATA.forEach(function(item,index){
           let obj={}
-          obj.code=item.code
-          obj.name=item.name
-          province.push(obj)
+          if(item.code === ths.cover.code){
+            obj.code=item.code;
+            obj.name=item.name;
+            province.push(obj)
+          }
+          if(!ths.cover.code){
+            obj.code=item.code;
+            obj.name=item.name;
+            province.push(obj)
+          }
         })
+        console.log('province---',province)
         return province
       },
       //根据省份得到城市数据
@@ -193,7 +213,8 @@
               return
             })
           }
-        })
+        });
+        console.log('-----city',city)
         return city
       },
       //根据城市和省份得到区域数据
@@ -224,21 +245,15 @@
       },
 
       confirm() {
-        // this.visible = false;
         this.close();
-        this.$emit('confirm', this.addressProvince, this.addressCity);
+        this._hideLinkage();
       },
-
-      open() {
-        this.$refs['popup'].currentValue = true;
-        this.visible = true;
-      },
-      handleChange:function () {
-        console.log("---------handleChange")
-      },
+     /* open() {
+        this.$refs['popup'].isShow = true;
+        this.visibleFlag = true;
+      },*/
       close() {
-        this.$refs['popup'].currentValue = false;
-        this.visible = false;
+        this.$emit('getLinkAddress');
       }
     }
   }

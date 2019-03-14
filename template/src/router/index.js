@@ -1,24 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import TestAddressIndex from '@/views/TestAddressIndex'
 
-import Index from '@/views/Index.vue'
+Vue.use(Router)
 
-
-let routes = [
+export default new Router({
+  routes: [
     {
-        path: '/',
-        name: 'Index',
-        component: Index,
-        meta: {
-            value: 1
-        }
-    },
-];
-
-Vue.use(Router);
-
-let router = new Router({
-  routes
-});
-
-export default router
+      path: '/',
+      name: 'TestAddressIndex',
+      component: TestAddressIndex
+    }
+  ]
+})
