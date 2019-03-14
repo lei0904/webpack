@@ -1,6 +1,5 @@
 /**
  * JSBridge 操作组件
- * @type {{registerHandler, send, callHandler}}
  *
  * callback函数返回参数约定
  *
