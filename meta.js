@@ -77,6 +77,7 @@ module.exports = {
     lint: {
       when: 'isNotTest',
       type: 'confirm',
+      required: false,
       message: 'Use ESLint to lint your code?',
     },
     lintConfig: {
@@ -104,6 +105,7 @@ module.exports = {
     unit: {
       when: 'isNotTest',
       type: 'confirm',
+      required: false,
       message: 'Set up unit tests',
     },
     runner: {
@@ -131,6 +133,7 @@ module.exports = {
     e2e: {
       when: 'isNotTest',
       type: 'confirm',
+      required: false,
       message: 'Setup e2e tests with Nightwatch?',
     },
     autoInstall: {
