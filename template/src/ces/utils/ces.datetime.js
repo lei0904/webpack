@@ -12,13 +12,6 @@
  *  get: 获取 想要的 方式
  *  format: 格式化日期
  *
- * @type {{
- *  WEEK,
- *  FULL_WEEK,
- *  PART,
- *  get,
- *  format
- * }}
  */
 
 
