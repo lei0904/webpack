@@ -80,6 +80,10 @@ module.exports = {
       required: false,
       message: 'Use ESLint to lint your code?',
     },
+      "vuex":{
+          "type": "confirm",
+          "message": "Install vuex?"
+      },
     lintConfig: {
       when: 'isNotTest && lint',
       type: 'list',
@@ -171,7 +175,9 @@ module.exports = {
     'test/unit/karma.conf.js': "unit && runner === 'karma'",
     'test/unit/specs/index.js': "unit && runner === 'karma'",
     'test/unit/setup.js': "unit && runner === 'jest'",
-    'test/e2e/**/*': 'e2e'
+    'test/e2e/**/*': 'e2e',
+    'src/store/**/*': 'vuex',  //加入自己的目录
+    'src/router/**/*': 'router'
   },
   complete: function(data, { chalk }) {
     const green = chalk.green
